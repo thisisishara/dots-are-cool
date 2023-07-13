@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dots are Cool</title>
+    <link rel="icon" href="public/favicon.ico" type="image/x-icon" />
+    <meta
+      name="description"
+      content="A pure CSS-only background with a cool dot pattern"
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://www.thisisishara.com/gists/dots-are-cool"
+    />
+    <meta property="og:title" content="Dots are Cool" />
+    <meta
+      property="og:description"
+      content="A pure CSS-only background with a cool dot pattern"
+    />
+    <meta property="og:image" content="" />
+    <meta
+      property="og:url"
+      content="https://www.thisisishara.com/gists/dots-are-cool"
+    />
+    <meta
+      name="keywords"
+      content="Dots, CSS background, Dot pattern, Cool web design, frontend design, frontend, web development, pure css"
+    />
+    <link
+      rel="icon"
+      href="public/favicon-16x16.png"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="public/favicon-32x32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link rel="icon" sizes="192x192" href="public/android-chrome-192x192.png" />
+    <link rel="icon" sizes="512x512" href="public/android-chrome-512x512.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="public/apple-touch-icon.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap"
+    />
+    <script src="scripts/toastify-js.net_npm_toastify-js"></script>
+    <link
+      rel="stylesheet"
+      href="scripts/toastify-js_src_toastify.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="scripts/simplebar@6.2.5_dist_simplebar.min.css"
+    />
+    <script src="scripts/simplebar@6.2.5_dist_simplebar.min.js"></script>
+    <script src="scripts/prismjs@1.24.0_prism.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #131b24;
+      }
+
+      .dot-matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        background-image: radial-gradient(#212f3d 5%, transparent 7%);
+        background-position: 0 0;
+        background-size: 1.8rem 1.8rem;
+        z-index: -1;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      h1 {
+        color: #273746;
+        font-family: "Outfit", Arial, sans-serif;
+        font-size: 32px;
+      }
+
+      .code-block {
+        border-radius: 15px;
+        overflow: hidden;
+        padding: 0;
+        margin-top: 0;
+        font-family: "Source Code Pro", monospace;
+        font-size: 14px;
+        color: #fff;
+        position: relative;
+        text-align: left;
+        width: fit-content;
+      }
+
+      .code-block pre {
+        margin: 0;
+        padding: 20px 30px;
+        white-space: pre-wrap;
+        width: fit-content !important;
+      }
+
+      /* Background color for code block */
+      .code-block,
+      .code-bg {
+        background-color: #101417 !important;
+      }
+
+      .file-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #202b33;
+        border-radius: 4px 4px 0 0;
+        padding: 8px 16px;
+      }
+
+      .file-name {
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .copy-button {
+        background-color: transparent;
+        color: #fff;
+        transition: all 0.3s ease;
+        border-radius: 10%;
+        border: none;
+        padding: 0.3rem 0.5rem;
+        padding-top: 0.6rem;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .copy-button:hover {
+        background-color: #383050;
+        color: #9a57ff;
+      }
+
+      .copy-button:active {
+        background-color: #9a57ff;
+        color: #fff;
+      }
+
+      /* Custom Prism.js syntax highlighting colors */
+      code[class*="language-"],
+      pre[class*="language-"] {
+        color: #f8f8f2;
+        font-family: "Source Code Pro", Consolas, Monaco, "Andale Mono",
+          "Ubuntu Mono", monospace;
+        text-align: left;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+        line-height: 1.5;
+        tab-size: 4;
+        hyphens: none;
+      }
+
+      .token.comment,
+      .token.prolog,
+      .token.doctype,
+      .token.cdata {
+        color: #61676d;
+      }
+
+      .token.punctuation {
+        color: #968cff;
+      }
+
+      .token.namespace {
+        opacity: 0.7;
+      }
+
+      .token.property,
+      .token.keyword,
+      .token.tag {
+        color: #36bcff;
+      }
+
+      .token.class-name {
+        color: #a6e22e;
+      }
+
+      .token.boolean,
+      .token.constant {
+        color: #ae81ff;
+      }
+
+      .token.symbol,
+      .token.deleted {
+        color: #36bcff;
+      }
+
+      .token.number {
+        color: #ae81ff;
+      }
+
+      .token.selector,
+      .token.attr-name,
+      .token.string,
+      .token.char,
+      .token.builtin,
+      .token.inserted {
+        color: #a6e22e;
+      }
+
+      .token.variable {
+        color: #f8f8f2;
+      }
+
+      .token.operator {
+        color: #f8f8f2;
+      }
+
+      .token.entity {
+        color: #f8f8f2;
+        cursor: help;
+      }
+
+      .token.url {
+        color: #f8f8f2;
+      }
+
+      .language-css .token.string,
+      .style .token.string {
+        color: #9b43ff;
+      }
+
+      .token.atrule,
+      .token.attr-value {
+        color: #ef5bff;
+      }
+
+      .token.function {
+        color: #a6e22e;
+      }
+
+      .token.regex {
+        color: #e6db74;
+      }
+
+      .token.important {
+        color: #fd7c1f;
+      }
+
+      .token.important .token.keyword {
+        color: #fd7c1f;
+      }
+
+      .token.bold {
+        font-weight: bold;
+      }
+
+      .token.italic {
+        font-style: italic;
+      }
+
+      .token.entity {
+        cursor: help;
+      }
+    </style>
+    <style>
+      .scrollable-container {
+        width: 60vw;
+        height: 50vh;
+      }
+
+      .scrollable-content {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <style>
+      .toastify {
+        font-family: "Outfit", Arial, sans-serif;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+
+      .toast-close {
+        margin-left: 0.8rem;
+      }
+    </style>
+    <script>
+      function copyCode() {
+        const codeBlock = document.querySelector(".code-block pre");
+        const code = codeBlock.textContent;
+
+        navigator.clipboard
+          .writeText(code)
+          .then(() => {
+            Toastify({
+              text: "Code copied to clipboard!",
+              duration: 2500,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+              close: true,
+            }).showToast();
+          })
+          .catch((error) => {
+            console.error("Failed to copy code:", error);
+            Toastify({
+              text: "Failed to copy code",
+              duration: 3000,
+              gravity: "top",
+              position: "right",
+              backgroundColor: "linear-gradient(to right, #F44336, #EC407A)",
+              close: true,
+            }).showToast();
+          });
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="dot-matrix"></div>
+    <div class="container">
+      <h1>Dots are cool</h1>
+
+      <div class="code-block">
+        <div class="file-bar">
+          <div class="file-name">dots_are_cool.html</div>
+          <button class="copy-button" onclick="copyCode()">
+            <i class="material-icons">content_copy</i>
+          </button>
+        </div>
+
+        <div class="scrollable-container">
+          <div class="scrollable-content" data-simplebar>
+            <pre
+              class="code-bg"
+            ><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Cool Dots &lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css2?family=Outfit&amp;display=swap&quot;&gt;
+  &lt;style&gt;
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #17202A;
+    }
+    
+    .dot-matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      background-image: radial-gradient(#212F3D 5%, transparent 7%);
+      background-position: 0 0;
+      background-size: 1.8rem 1.8rem;
+      z-index: -1;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      color: #273746;
+      font-family: 'Outfit', Arial, sans-serif;
+      text-align: center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class=&quot;dot-matrix&quot;&gt;&lt;/div&gt;
+  &lt;h1&gt;Dots are cool&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      Prism.highlightAll();
+    </script>
+  </body>
+</html>
